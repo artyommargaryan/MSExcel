@@ -6,35 +6,35 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CellTest {
     @Test
-    public void cellsGetValuesTestForIntAndString() {
+    public void cellsGetValuesForIntAndString() {
         Cell cell = new Cell();
         cell.setValue(Integer.toString(1));
         assertNotEquals(1, cell.getValue());
     }
 
     @Test
-    public void cellsGetValuesTestForStringAndString() {
+    public void cellsGetValuesForStringAndString() {
         Cell cell = new Cell();
         cell.setValue(Integer.toString(1));
         assertEquals("1", cell.getValue());
     }
 
     @Test
-    public void cellsGetValuesTestForDoubleAndString() {
+    public void cellsGetValuesForDoubleAndString() {
         Cell cell = new Cell();
         cell.setValue(Double.toString(1.0));
         assertNotEquals(1.0, cell.getValue());
     }
 
     @Test
-    public void cellsGetValuesTestForStringFromFromDoubleAndString() {
+    public void cellsGetValuesForStringFromFromDoubleAndString() {
         Cell cell = new Cell();
         cell.setValue(Double.toString(1.0));
         assertEquals("1.0", cell.getValue());
     }
 
     @Test
-    public void cellsGetValuesTestForDateAndString() {
+    public void cellsGetValuesForDateAndString() {
         Cell cell = new Cell();
         Date date = new Date(new Date.Day(5), Date.Month.JANUARY, new Date.Year(1200));
         cell.setValue(date.toString());
@@ -42,7 +42,7 @@ public class CellTest {
     }
 
     @Test
-    public void cellsGetValuesTestForStringFromDateAndString() {
+    public void cellsGetValuesForStringFromDateAndString() {
         Cell cell = new Cell();
         Date date = new Date(new Date.Day(5), Date.Month.JANUARY, new Date.Year(1200));
         cell.setValue(date.toString());
@@ -50,7 +50,7 @@ public class CellTest {
     }
 
     @Test
-    public void cellsToIntTest() {
+    public void cellsToInt() {
         Cell cell = new Cell();
         cell.setValue(Integer.toString(1));
         assertEquals(1, cell.toInt());
@@ -64,7 +64,7 @@ public class CellTest {
     }
 
     @Test
-    public void cellsToDoubleTest() {
+    public void cellsToDouble() {
         Cell cell = new Cell();
         cell.setValue(Double.toString(1.0));
         assertEquals(1.0, cell.toDouble());
@@ -78,7 +78,7 @@ public class CellTest {
     }
 
     @Test
-    public void cellsToDateTest() {
+    public void cellsToDate() {
         Cell cell = new Cell();
         Date date = new Date(new Date.Day(5), Date.Month.JANUARY, new Date.Year(2007));
         cell.setValue(date.toString());
@@ -93,7 +93,7 @@ public class CellTest {
     }
 
     @Test
-    public void cellGetColorTest() {
+    public void cellGetColor() {
         Cell cell = new Cell();
         assertEquals(Cell.Color.WHITE, cell.getColor());
         cell.setColor(Cell.Color.GREEN);
@@ -105,7 +105,7 @@ public class CellTest {
     }
 
     @Test
-    public void cellResetTest() {
+    public void cellReset() {
         Cell cell = new Cell();
         cell.setValue("aaa");
         cell.setColor(Cell.Color.RED);

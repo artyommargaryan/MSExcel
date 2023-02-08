@@ -14,36 +14,42 @@ public class Spreadsheet {
         this.columns = col;
     }
 
-    public void setCellAt(int r, int c, Cell cl) {
-        if (r >= rows || r < 0) {
-            throw new IllegalArgumentException("r: " + r);
-        }
-        if (c >= columns || c < 0) {
+    private void validateColumn(int c) {
+        if (isValidColumn(c)) {
             throw new IllegalArgumentException("c: " + c);
         }
+    }
 
+    private boolean isValidColumn(int c) {
+        return c >= columns || c < 0;
+    }
+
+    private void validateRow(int r) {
+        if (isValidRow(r)) {
+            throw new IllegalArgumentException("r: " + r);
+        }
+    }
+
+    private boolean isValidRow(int r) {
+        return r >= rows || r < 0;
+    }
+
+    public void setCellAt(int r, int c, Cell cl) {
+        validateRow(r);
+        validateColumn(c);
         cells[r][c].setValue(cl.getValue());
         cells[r][c].setColor(cl.getColor());
     }
 
     public void setCellAt(int r, int c, String cl) {
-        if (r >= rows || r < 0) {
-            throw new IllegalArgumentException("r: " + r);
-        }
-        if (c >= columns || c < 0) {
-            throw new IllegalArgumentException("c: " + c);
-        }
+        validateRow(r);
+        validateColumn(c);
         cells[r][c].setValue(cl);
     }
 
     public Cell getCellAt(int r, int c) {
-        if (r >= rows || r < 0) {
-            throw new IllegalArgumentException("r: " + r);
-        }
-        if (c >= columns || c < 0) {
-            throw new IllegalArgumentException("c: " + c);
-        }
-
+        validateRow(r);
+        validateColumn(c);
         return cells[r][c];
     }
 
@@ -56,9 +62,7 @@ public class Spreadsheet {
     }
 
     public void addRow(int r) {
-        if (r >= rows || r < 0) {
-            throw new IllegalArgumentException("" + r);
-        }
+        validateRow(r);
 
         Cell[][] tmp = new Cell[rows + 1][columns];
         int counter = 0;
@@ -78,9 +82,7 @@ public class Spreadsheet {
     }
 
     public void removeRow(int r) {
-        if (r >= rows || r < 0) {
-            throw new IllegalArgumentException("" + r);
-        }
+        validateRow(r);
 
         Cell[][] tmp = new Cell[rows - 1][columns];
         int counter = 0;
@@ -100,9 +102,7 @@ public class Spreadsheet {
     }
 
     public void addColumn(int c) {
-        if (c >= columns || c < 0) {
-            throw new IllegalArgumentException("" + c);
-        }
+        validateColumn(c);
 
         Cell[][] tmp = new Cell[rows][columns + 1];
         int counter;
@@ -124,9 +124,7 @@ public class Spreadsheet {
 
 
     public void removeColumn(int c) {
-        if (c >= columns || c < 0) {
-            throw new IllegalArgumentException("" + c);
-        }
+        validateColumn(c);
 
         Cell[][] tmp = new Cell[rows][columns - 1];
         int counter;
@@ -147,13 +145,8 @@ public class Spreadsheet {
     }
 
     public void swapRows(int r1, int r2) {
-        if (r1 >= rows || r1 < 0) {
-            throw new IllegalArgumentException("r1: " + r1);
-        }
-
-        if (r2 >= rows || r2 < 0) {
-            throw new IllegalArgumentException("r2: " + r2);
-        }
+        validateRow(r1);
+        validateRow(r2);
 
         Cell tmp = new Cell();
         for (int i = 0; i < columns; ++i) {
@@ -167,13 +160,8 @@ public class Spreadsheet {
     }
 
     public void swapColumns(int c1, int c2) {
-        if (c1 >= columns || c1 < 0) {
-            throw new IllegalArgumentException("c1: " + c1);
-        }
-
-        if (c2 >= columns || c2 < 0) {
-            throw new IllegalArgumentException("c2: " + c2);
-        }
+        validateColumn(c1);
+        validateColumn(c2);
 
         Cell tmp = new Cell();
         for (int i = 0; i < rows; ++i) {
@@ -208,6 +196,4 @@ public class Spreadsheet {
 
         return col;
     }
-
-
 }

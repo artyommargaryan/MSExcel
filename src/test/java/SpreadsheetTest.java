@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class SpreadsheetTest {
     @Test
-    public void spreadsheetGetCellAtWithCellTest() {
+    public void spreadsheetGetCellAtWithCell() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         Cell cell = new Cell();
         spreadsheet.setCellAt(0, 0, cell);
@@ -15,7 +15,7 @@ public class SpreadsheetTest {
     }
 
     @Test
-    public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfRIsBiggerThanRow() {
+    public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfRIsBiggerOrEqualThanRow() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         Cell cell = new Cell();
         assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(5, 0, cell));
@@ -30,7 +30,7 @@ public class SpreadsheetTest {
 
 
     @Test
-    public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfCIsBiggerThanColumn() {
+    public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfCIsBiggerOrEqualThanColumn() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         Cell cell = new Cell();
         assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(5, 0, cell));
@@ -44,7 +44,7 @@ public class SpreadsheetTest {
     }
 
     @Test
-    public void spreadsheetGetCellAtWithStringTest() {
+    public void spreadsheetGetCellAtWithString() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         spreadsheet.setCellAt(0, 0, "aaa");
         assertEquals("aaa", spreadsheet.getCellAt(0, 0).getValue());
@@ -52,35 +52,59 @@ public class SpreadsheetTest {
     }
 
     @Test
-    public void spreadsheetAddRowTest() {
+    public void spreadsheetGetCellAtWithStringShouldThrowExceptionIfRIsBiggerOrEqualThanRow() {
+        Spreadsheet spreadsheet = new Spreadsheet(4, 5);
+        assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(5, 0, "aaa"));
+    }
+
+    @Test
+    public void spreadsheetGetCellAtWithStringShouldThrowExceptionIfRIsNegative() {
+        Spreadsheet spreadsheet = new Spreadsheet(4, 5);
+        assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(-1, 2, "aaa"));
+    }
+
+    @Test
+    public void spreadsheetGetCellAtWithStringShouldThrowExceptionIfCIsBiggerOrEqualThanColumn() {
+        Spreadsheet spreadsheet = new Spreadsheet(4, 5);
+        assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(2, 7, "aaa"));
+    }
+
+    @Test
+    public void spreadsheetGetCellAtWithStringShouldThrowExceptionIfCIsNegative() {
+        Spreadsheet spreadsheet = new Spreadsheet(4, 5);
+        assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(3, -1, "aaa"));
+    }
+
+    @Test
+    public void spreadsheetAddRow() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         spreadsheet.addRow(1);
         assertEquals(5, spreadsheet.getRow());
     }
 
     @Test
-    public void spreadsheetRemoveRowTest() {
+    public void spreadsheetRemoveRow() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         spreadsheet.removeRow(1);
         assertEquals(3, spreadsheet.getRow());
     }
 
     @Test
-    public void spreadsheetAddColumnTest() {
+    public void spreadsheetAddColumn() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         spreadsheet.addColumn(1);
         assertEquals(6, spreadsheet.getColumn());
     }
 
     @Test
-    public void spreadsheetRemoveColumnTest() {
+    public void spreadsheetRemoveColumn() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         spreadsheet.removeColumn(1);
         assertEquals(4, spreadsheet.getColumn());
     }
 
     @Test
-    public void spreadsheetSwapRowsTest() {
+    public void spreadsheetSwapRows() {
         Spreadsheet spreadsheet = new Spreadsheet(2, 3);
         initializeSpreadsheet(spreadsheet);
         Cell[] cells1 = spreadsheet.getRowAt(0);
@@ -101,7 +125,7 @@ public class SpreadsheetTest {
     }
 
     @Test
-    public void spreadsheetSwapColumnsTest() {
+    public void spreadsheetSwapColumns() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         initializeSpreadsheet(spreadsheet);
         Cell[] cells1 = spreadsheet.getColumnsAt(0);
