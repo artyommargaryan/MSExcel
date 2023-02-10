@@ -11,6 +11,15 @@ public class Cell {
         RED,
     }
 
+    public Cell() {
+        value = "";
+    }
+
+    public Cell(String value, Color color) {
+        this.value = value;
+        this.color = color;
+    }
+
     public void setValue(String value) {
         this.value = value;
     }

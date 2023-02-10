@@ -3,25 +3,15 @@ public class Spreadsheet {
     private int rows;
     private int columns;
 
-    public Spreadsheet(int rows, int col) {
-        cells = new Cell[rows][col];
+    public Spreadsheet(int rows, int columns) {
+        cells = new Cell[rows][columns];
         for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < col; ++j) {
+            for (int j = 0; j < columns; ++j) {
                 cells[i][j] = new Cell();
             }
         }
         this.rows = rows;
-        this.columns = col;
-    }
-
-    private void validateColumn(int c) {
-        if (isValidColumn(c)) {
-            throw new IllegalArgumentException("c: " + c);
-        }
-    }
-
-    private boolean isValidColumn(int c) {
-        return c >= columns || c < 0;
+        this.columns = columns;
     }
 
     private void validateRow(int r) {
@@ -32,6 +22,16 @@ public class Spreadsheet {
 
     private boolean isValidRow(int r) {
         return r >= rows || r < 0;
+    }
+
+    private void validateColumn(int c) {
+        if (isValidColumn(c)) {
+            throw new IllegalArgumentException("c: " + c);
+        }
+    }
+
+    private boolean isValidColumn(int c) {
+        return c >= columns || c < 0;
     }
 
     public void setCellAt(int r, int c, Cell cl) {

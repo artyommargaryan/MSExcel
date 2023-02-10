@@ -30,7 +30,6 @@ public class DateTest {
 
     @Test
     public void dateParseToDateThrowsIllegalArgumentException() {
-        Date date1 = new Date(new Date.Day(6), Date.Month.APRIL, new Date.Year(2020));
         assertThrows(IllegalArgumentException.class, () -> Date.parseToDate("32 JANUARY 2022"));
     }
 
