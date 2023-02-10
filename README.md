@@ -25,7 +25,7 @@ Year year = date.getYear();
 ```
 
 ## Implementation Details
-The Date class consists of three components: ` Day`, `Month`, and `Year`. Each component is 
+The `Date` class consists of three components: ` Day`, `Month`, and `Year`. Each component is 
 implemented as a separate class.
 
 The `Day` class has an integer `day` and includes `toString()`, `equals()`, and `hashCode()` 
