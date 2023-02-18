@@ -1,4 +1,4 @@
 package pa;
 
-public abstract class AbstractTable<Tsergey> {
+public abstract class AbstractTable<T> {
 }
