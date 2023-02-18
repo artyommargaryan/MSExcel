@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import pa.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -7,19 +8,19 @@ public class DateTest {
     @Test
     public void dateGetDayTest() {
         Date date1 = new Date(new Date.Day(6), Date.Month.APRIL, new Date.Year(2020));
-        assertEquals(new Date.Day(6), date1.getDay());
+        assertEquals(new Date.Day(6), date1.day());
     }
 
     @Test
     public void dateGetMonthTest() {
         Date date1 = new Date(new Date.Day(6), Date.Month.APRIL, new Date.Year(2020));
-        assertEquals(Date.Month.APRIL, date1.getMonth());
+        assertEquals(Date.Month.APRIL, date1.month());
     }
 
     @Test
     public void dateGetYearTest() {
         Date date1 = new Date(new Date.Day(6), Date.Month.APRIL, new Date.Year(2020));
-        assertEquals(new Date.Year(2020), date1.getYear());
+        assertEquals(new Date.Year(2020), date1.year());
     }
 
     @Test

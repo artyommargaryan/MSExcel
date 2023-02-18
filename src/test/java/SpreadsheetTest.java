@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import pa.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,23 +9,23 @@ public class SpreadsheetTest {
     @Test
     public void spreadsheetGetCellAtWithCell() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
-        Cell cell = new Cell();
+        Cell cell = new IntCell();
         spreadsheet.setCellAt(0, 0, cell);
-        assertEquals(cell.getValue(), spreadsheet.getCellAt(0, 0).getValue());
+        assertEquals(cell.getStringValue(), spreadsheet.getCellAt(0, 0).getStringValue());
         assertEquals(cell.getColor(), spreadsheet.getCellAt(0, 0).getColor());
     }
 
     @Test
     public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfRIsBiggerOrEqualThanRow() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
-        Cell cell = new Cell();
+        Cell cell = new StringCell();
         assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(5, 0, cell));
     }
 
     @Test
     public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfRIsNegative() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
-        Cell cell = new Cell();
+        Cell cell = new DoubleCell();
         assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(-1, 3, cell));
     }
 
@@ -32,14 +33,14 @@ public class SpreadsheetTest {
     @Test
     public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfCIsBiggerOrEqualThanColumn() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
-        Cell cell = new Cell();
+        Cell cell = new DateCell();
         assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(5, 0, cell));
     }
 
     @Test
     public void spreadsheetGetCellAtWithCellShouldThrowExceptionIfCIsNegative() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
-        Cell cell = new Cell();
+        Cell cell = new IntCell();
         assertThrows(IllegalArgumentException.class, () -> spreadsheet.setCellAt(3, -1, cell));
     }
 
@@ -47,7 +48,7 @@ public class SpreadsheetTest {
     public void spreadsheetGetCellAtWithString() {
         Spreadsheet spreadsheet = new Spreadsheet(4, 5);
         spreadsheet.setCellAt(0, 0, "aaa");
-        assertEquals("aaa", spreadsheet.getCellAt(0, 0).getValue());
+        assertEquals("aaa", spreadsheet.getCellAt(0, 0).getStringValue());
         assertEquals(Cell.Color.WHITE, spreadsheet.getCellAt(0, 0).getColor());
     }
 

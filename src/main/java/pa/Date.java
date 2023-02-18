@@ -1,14 +1,12 @@
+package pa;
+
 import java.util.Objects;
 
-public class Date {
-    private Day day;
-    private Month month;
-    private Year year;
-
+public record Date(pa.Date.Day day, pa.Date.Month month, pa.Date.Year year) {
     public static class Day {
         int day;
 
-        Day(int day) {
+        public Day(int day) {
             this.day = day;
         }
 
@@ -36,7 +34,7 @@ public class Date {
         }
     }
 
-    enum Month {
+    public enum Month {
         JANUARY(1),
         FEBRUARY(2),
         MARCH(3),
@@ -64,9 +62,9 @@ public class Date {
 
     public static class Year {
 
-        private int year;
+        private final int year;
 
-        Year(int year) {
+        public Year(int year) {
             this.year = year;
         }
 
@@ -95,27 +93,10 @@ public class Date {
 
     }
 
-
-    public Date(Day day, Month month, Year year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
-
+    public Date {
         if (!isValidDay(day, month, year)) {
             throw new IllegalArgumentException("Invalid day for given month and year");
         }
-    }
-
-    public Day getDay() {
-        return day;
-    }
-
-    public Month getMonth() {
-        return month;
-    }
-
-    public Year getYear() {
-        return year;
     }
 
     public static Date parseToDate(String value) {
@@ -144,27 +125,11 @@ public class Date {
     }
 
     private static boolean isValidDay(Day day, Month month, Year year) {
-        int numDaysInMonth = 0;
-        switch (month) {
-            case JANUARY:
-            case MARCH:
-            case MAY:
-            case JULY:
-            case AUGUST:
-            case OCTOBER:
-            case DECEMBER:
-                numDaysInMonth = 31;
-                break;
-            case APRIL:
-            case JUNE:
-            case SEPTEMBER:
-            case NOVEMBER:
-                numDaysInMonth = 30;
-                break;
-            case FEBRUARY:
-                numDaysInMonth = (isLeapYear(year) ? 29 : 28);
-                break;
-        }
+        int numDaysInMonth = switch (month) {
+            case JANUARY, MARCH, MAY, JULY, AUGUST, OCTOBER, DECEMBER -> 31;
+            case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
+            case FEBRUARY -> (isLeapYear(year) ? 29 : 28);
+        };
         return day.day >= 1 && day.day <= numDaysInMonth;
     }
 
@@ -194,10 +159,5 @@ public class Date {
         }
 
         return Objects.equals(year, date.year) && Objects.equals(month, date.month) && Objects.equals(day, date.day);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(year, month, day);
     }
 }
